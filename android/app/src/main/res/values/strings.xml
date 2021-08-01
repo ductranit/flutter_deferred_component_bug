@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="booksName">books</string>
+    <string name="idCoversName">idCovers</string>
+    <string name="enCoversName">enCovers</string>
+</resources>
+
