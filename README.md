@@ -1,16 +1,17 @@
-# deferred_components_test
+# deferred_components_bug
+This repo uses to reproduce flutter deferred component load [asset issue](https://github.com/flutter/flutter/issues/86923)
+## Here are the steps:
+- Build a release with `flutter build appbundle`
+- Install the buid into device by using [bundletool](https://developer.android.com/studio/command-line/bundletool)
+```
+java -jar bundletool.jar build-apks --bundle=/flutter_deferred_component_bug/build/app/outputs/bundle/release/app-release.aab --output=/flutter_deferred_component_bug/build/app/outputs/bundle/release/app.apks --local-testing
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+java -jar bundletool.jar install-apks --apks=/flutter_deferred_component_bug/build/app/outputs/bundle/release/app.apks
+```
+- Launch the app on device
+- Click on `install book component` button and wait for it loads
+- Click on `load book deferred asset` to show book image. It works normally
+- Click on `navigate to other screen` to show a webview screen
+- Click on `push new stack`
+- Click on `install cover component` button to install another component
+- Click on `load cover deferred asset` to show cover image. And there is an error in this step - the image can't be loaded (it works on debug)
